@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quanly_duan/screens/listbefenit.dart';
 import 'package:quanly_duan/screens/profile.dart';
 import 'package:quanly_duan/screens/screen-manager.dart';
 
@@ -72,7 +73,7 @@ class _HomeScreenemployeeState extends State<HomeScreenemployee>
             title: const Text('phúc lợi'),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
+                  MaterialPageRoute(builder: (context) => ListbefenitScreen()));
               // Add your logic here for About
             },
           ),
