@@ -1,7 +1,8 @@
-// import 'package:buyphone/screens/home.dart';
-// import 'package:buyphone/screens/cart.dart';
-// import 'package:buyphone/screens/proflie.dart';
 import 'package:flutter/material.dart';
+import 'package:quanly_duan/screens/acpbenefit.dart';
+import 'package:quanly_duan/screens/list_comple_task.dart';
+import 'package:quanly_duan/screens/profile.dart';
+import 'package:quanly_duan/screens/screen-manager.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,43 +35,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           onPressed: () {
             // Xử lý khi biểu tượng được nhấn
           },
-          // Row(
-          //   // children:_buildCategoryChips(), // Hiển thị các tag chọn loại sản phẩm
-          // ),
-          // SizedBox(width: 8), // Khoảng cách giữa các tag và biểu tượng
-          // IconButton(
-          //   icon: Icon(Icons.notifications), // Biểu tượng chuông thông báo
-          //   onPressed: () {
-          //     // Xử lý khi biểu tượng được nhấn
-          //   },
         ),
       ],
     );
   }
-
-  // List<Widget> _buildCategoryChips() {
-  //   return _categories
-  //       .map((category) => Padding(
-  //             padding: const EdgeInsets.symmetric(horizontal: 4),
-  //             child: Chip(
-  //               label: Text(category),
-  //               backgroundColor: category == _selectedCategory
-  //                   ? Colors.blue // Màu nền của tag đã chọn
-  //                   : Colors.grey[300], // Màu nền của các tag khác
-  //               labelStyle: TextStyle(
-  //                 color: category == _selectedCategory
-  //                     ? Colors.white // Màu chữ của tag đã chọn
-  //                     : Colors.black, // Màu chữ của các tag khác
-  //               ),
-  //               // onPressed: () {
-  //               //   setState(() {
-  //               //     _selectedCategory = category; // Cập nhật danh mục được chọn
-  //               //   });
-  //               // },
-  //             ),
-  //           ))
-  //       .toList();
-  // }
 
   Widget _buildDrawer() {
     return Drawer(
@@ -84,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Text('Menu'),
           ),
           ListTile(
-            title: const Text('Home'),
+            title: const Text('Trang chủ'),
             onTap: () {
               // Navigator.push(
               //       context,
@@ -93,41 +61,35 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               //   // Add your logic here for Home
             },
           ),
-          ListTile(
-            title: const Text('Categories'),
+        ListTile(
+            title: const Text('danh sách nhiệm vụ đã nộp'),
             onTap: () {
-              Navigator.pop(context);
-              // Add your logic here for About
-            },
-          ),
-          // Add more ListTile widgets for other menu items
-          ListTile(
-            title: const Text('Cart'),
-            onTap: () {
-              // Navigator.push(
-              // context, MaterialPageRoute(builder: (context) => CartPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => taskScreen()));
               // Add your logic here for About
             },
           ),
           ListTile(
-            title: const Text('Profile'),
+            title: const Text('hồ sơ cá nhân'),
             onTap: () {
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => ProfilePage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
               // Add your logic here for About
             },
           ),
           ListTile(
-            title: const Text('Privacy Policy'),
+            title: const Text('Quản lí cá nhân'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
               // Add your logic here for About
             },
           ),
           ListTile(
-            title: const Text('Terms and conditions'),
+            title: const Text('phê duyệt phúc lợi'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AcpbefenitScreen()));
               // Add your logic here for About
             },
           ),
@@ -136,19 +98,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  // Widget _buildContent() {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(horizontal: 16),
-  //     child: SingleChildScrollView(
-  //       child: Column(
-  //         children: [
-  //           SizedBox(
-  //               height: 20), // Khoảng cách giữa danh sách sản phẩm và banner
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _buildMenuItem() {
     return IntrinsicHeight(
@@ -189,21 +138,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 children: <Widget>[
                   ElevatedButton(
                     onPressed: () {
-                      // Logic khi nhấn nút tham gia
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromARGB(255, 83, 237, 243)),
-                      foregroundColor: MaterialStateProperty.all(
-                          const Color.fromARGB(255, 8, 0, 0)),
-                     // Nút có kích thước 1/2.2 chiều rộng màn hình và cao 40
-                    ),
-                    child: Text('Tham gia'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Logic khi nhấn nút xem
-                    },
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            EmployeeListScreen(),
+                      ),
+                    );
+                  },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                           Color.fromARGB(255, 83, 237, 243)),

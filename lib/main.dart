@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:quanly_duan/screens/home-employee.dart';
+import 'package:quanly_duan/screens/home.dart';
 import 'package:quanly_duan/screens/screen-manager.dart';
 import 'package:quanly_duan/screens/sign-in.dart';
 
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  EmployeeListScreen(),
+      home:  HomeScreenemployee(),
       // home:AccountPage(),
       debugShowCheckedModeBanner: false,
     );

@@ -7,12 +7,14 @@ class Employee {
 
   Employee({required this.name, required this.position, required this.tasks});
 }
+
 class Task {
   final String name;
   final String description;
 
   Task({required this.name, required this.description});
 }
+
 class EmployeeListScreen extends StatefulWidget {
   @override
   _EmployeeListScreenState createState() => _EmployeeListScreenState();
@@ -20,18 +22,30 @@ class EmployeeListScreen extends StatefulWidget {
 
 class _EmployeeListScreenState extends State<EmployeeListScreen> {
   List<Employee> employees = [
-    Employee(name: 'John Doe', position: 'Developer', tasks: [
-      Task(name: 'Task 3', description: 'Description for Task 3'),
-      Task(name: 'Task 4', description: 'Description for Task 4'),
-    ],),
-    Employee(name: 'Jane Smith', position: 'Designer',tasks: [
-      Task(name: 'Task 3', description: 'Description for Task 3'),
-      Task(name: 'Task 4', description: 'Description for Task 4'),
-    ],),
-    Employee(name: 'Alex Johnson', position: 'Manager',tasks: [
-      Task(name: 'Task 3', description: 'Description for Task 3'),
-      Task(name: 'Task 4', description: 'Description for Task 4'),
-    ],),
+    Employee(
+      name: 'John Doe',
+      position: 'Developer',
+      tasks: [
+        Task(name: 'Task 3', description: 'Description for Task 3'),
+        Task(name: 'Task 4', description: 'Description for Task 4'),
+      ],
+    ),
+    Employee(
+      name: 'Jane Smith',
+      position: 'Designer',
+      tasks: [
+        Task(name: 'Task 3', description: 'Description for Task 3'),
+        Task(name: 'Task 4', description: 'Description for Task 4'),
+      ],
+    ),
+    Employee(
+      name: 'Alex Johnson',
+      position: 'Manager',
+      tasks: [
+        Task(name: 'Task 3', description: 'Description for Task 3'),
+        Task(name: 'Task 4', description: 'Description for Task 4'),
+      ],
+    ),
   ];
 
   @override
@@ -70,40 +84,10 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your logic here for adding new employee
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('Add Employee'),
-                content: TextField(
-                  decoration: InputDecoration(labelText: 'Employee Name'),
-                  onChanged: (value) {
-                    // Handle input text
-                  },
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Cancel'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Add logic to add new employee
-                      setState(() {
-                        employees.add(Employee(
-                            name: 'New Employee', position: 'New Position',tasks: [Task(name: 'Task 3', description: 'Description for Task 3')]));
-                      });
-                      Navigator.pop(context);
-                    },
-                    child: Text('Add'),
-                  ),
-                ],
+          Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddEmployeeScreen()),
               );
-            },
-          );
         },
         child: Icon(Icons.add),
       ),
@@ -149,8 +133,8 @@ class EmployeeCard extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                icon: Icon(Icons.remove_red_eye),
-                 onPressed: () {
+                  icon: Icon(Icons.remove_red_eye),
+                  onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -158,8 +142,7 @@ class EmployeeCard extends StatelessWidget {
                             ViewEmployeeScreen(employee: employee),
                       ),
                     );
-                  }
-              ),
+                  }),
               IconButton(
                   icon: Icon(Icons.edit),
                   onPressed: () {
@@ -176,8 +159,8 @@ class EmployeeCard extends StatelessWidget {
                 onPressed: onDelete,
               ),
               IconButton(
-                icon: Icon(Icons.assignment),
-                onPressed: () {
+                  icon: Icon(Icons.assignment),
+                  onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -185,8 +168,7 @@ class EmployeeCard extends StatelessWidget {
                             AssignmentScreen(employee: employee),
                       ),
                     );
-                  }
-              ),
+                  }),
             ],
           ),
         ],
@@ -236,20 +218,6 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
               },
             ),
             SizedBox(height: 15),
-            DropdownButtonFormField(
-              value: _role,
-              items: ['Nhân viên', 'Quản lý', 'Leader'].map((role) {
-                return DropdownMenuItem(
-                  value: role,
-                  child: Text(role),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  _role = value.toString();
-                });
-              },
-            ),
             SizedBox(height: 15),
             ElevatedButton(
               onPressed: () {
@@ -381,8 +349,6 @@ class _EditEmployeeScreenState extends State<EditEmployeeScreen> {
   }
 }
 
-
-
 class AssignmentScreen extends StatefulWidget {
   final Employee employee;
 
@@ -396,7 +362,6 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
   final _formKey = GlobalKey<FormState>();
   late String _name;
   late String _position;
-  
 
   @override
   void initState() {
@@ -405,7 +370,7 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
     _position = widget.employee.position;
   }
 
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -485,7 +450,6 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     // Update the employee with the new name and position
-                    // ...
                     Navigator.pop(context);
                   }
                 },
@@ -517,9 +481,11 @@ class ViewEmployeeScreen extends StatelessWidget {
           children: [
             Text(employee.name, style: Theme.of(context).textTheme.headline6),
             SizedBox(height: 16),
-            Text(employee.position, style: Theme.of(context).textTheme.subtitle1),
+            Text(employee.position,
+                style: Theme.of(context).textTheme.subtitle1),
             SizedBox(height: 16),
-            Text('Assigned Tasks:', style: Theme.of(context).textTheme.subtitle1),
+            Text('Assigned Tasks:',
+                style: Theme.of(context).textTheme.subtitle1),
             SizedBox(height: 16),
             Expanded(
               child: ListView.builder(
